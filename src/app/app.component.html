@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="card">
+    <h5 class="card-header">Registration Form</h5>
+    <div class="card-body">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+
+          <div class="form-group col-12">
+            <label>First Name</label>
+            <input type="text" formControlName="firstName" class="form-control" placeholder="Russo"
+              [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+              <div *ngIf="f.firstName.errors?.['required']">First Name is required </div>
+              <div *ngIf="f.firstName.errors?.['pattern']"> Letters only allowed </div>
+            </div>
+          </div>
+
+
+          <div class="form-group col-12">
+            <label>Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control" placeholder="Brothers"
+              [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+            <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+              <div *ngIf="f.lastName.errors?.['required']">Last Name is required</div>
+              <div *ngIf="f.lastName.errors?.['pattern']"> Letters only allowed </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-6">
+            <label>Date of Birth</label>
+            <input type="date" formControlName="dob" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.dob.errors }" />
+            <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+              <div *ngIf="f.dob.errors?.['required']">
+                Date of Birth is required
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group col-6">
+            <label>Mobile No.</label>
+            <input type="text" formControlName="phone" class="form-control" placeholder="0123 456 789"
+              [ngClass]="{ 'is-invalid': submitted && f.phone.errors }" />
+            <div *ngIf="submitted && f.phone.invalid" class="invalid-feedback">
+              <div *ngIf="f.phone.errors?.['required']">Mobile number is required</div>
+              <div *ngIf="f.phone.errors?.['minlength']">It must be 10 digit phone number</div>
+              <div *ngIf="f.phone.errors?.['maxlength']">It must be 10 digit phone number</div>
+              <div *ngIf="f.phone.errors?.['pattern']">Invalid</div>
+            </div>
+          </div>
+        </div>
+
+        
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" formControlName="email" class="form-control" placeholder="russobrothers@gmail.com"
+            [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors?.['required']">Email is required</div>
+            <div *ngIf="f.email.errors?.['email']">
+              Invalid
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control" placeholder="Eg: Rubr@123"
+            [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors?.['required']">Password is required</div>
+            <div *ngIf="f.password.errors?.['minlength']">
+              Invalid Password
+            </div>
+            <div *ngIf="f.password.errors?.['pattern']">*At least 6 characters in length<br>
+              *Lowercase letters<br>
+              *Uppercase letters<br>
+              *Numbers<br>
+              *Special characters<br>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Eg: Rubr@123"
+            [ngClass]="{'is-invalid': submitted && f.confirmPassword.errors}" />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors?.['required']"><br>
+            </div>
+            <div *ngIf="f.confirmPassword.errors?.['Match']"> Password does not match
+            </div>
+          </div>
+        </div><br>
+
+
+        <!-- <div class="form-group"> -->
+        <span class="butn" (click)="fileInput.click()">Choose File</span><br>
+        <input style="display: none" size="2MB" type="file" (change)="onFileChanged($event)" accept=".jpg,.png,.jpeg"
+          #fileInput multiple="true" /><br>
+        <div *ngFor="let selected of listOfFiles; let index = index">
+          *{{ selected }}
+          <span mat-icon-button (click)="removeSelectedFile(index)"><i class="fa fa-trash-o" style="font-size:20px"></i></span>
+        </div><br>
+        <!-- </div> -->
+
+        <div class="form-group">
+          <button class="btn btn-primary">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
